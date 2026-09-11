@@ -7,7 +7,7 @@ Neste laboratório vamos configurar e analisar o protocolo de roteamento dinâmi
 
 O cenário utilizado neste laboratório é ilustrado na figura abaixo:
 
-![Topologia do laboratório OSPFv3](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/topologia.png)
+![Topologia do laboratório OSPFv3](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/topologia.png)
 
 Os roteadores **n1Backbone**, **n2Backbone** e **n3Backbone** formam a área de backbone do OSPF, identificada por `0.0.0.0`. O host **n4HostA** utiliza o endereço `2001:db8:3::20/64`, enquanto o host **n5HostB** utiliza o endereço `2001:db8:4::20/64`.
 
@@ -67,7 +67,7 @@ ping6 -c 4 2001:db8:3::1
 
 O teste deve ser bem-sucedido, pois os dois nós estão na mesma sub-rede.
 
-![Teste de conectividade entre n4HostA e n2Backbone](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/ping-host-a-roteador.png)
+![Teste de conectividade entre n4HostA e n2Backbone](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/ping-host-a-roteador.png)
 
 ### 2.2 Teste entre hosts de sub-redes diferentes
 
@@ -79,7 +79,7 @@ ping6 -c 4 2001:db8:4::20
 
 Neste momento, o teste deve falhar. Embora os roteadores estejam fisicamente interligados, eles ainda conhecem apenas suas redes diretamente conectadas.
 
-![Falha no teste de conectividade entre n4HostA e n5HostB](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/ping-host-a-host-b-falha.png)
+![Falha no teste de conectividade entre n4HostA e n5HostB](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/ping-host-a-host-b-falha.png)
 
 ### 2.3 Inspeção da tabela de roteamento
 
@@ -89,7 +89,7 @@ No terminal do `n2Backbone`, exiba as rotas IPv6 conhecidas pelo sistema operaci
 ip -6 route show
 ```
 
-![Tabela de rotas inicial do n2Backbone](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/rotas-iniciais-r2.png)
+![Tabela de rotas inicial do n2Backbone](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/rotas-iniciais-r2.png)
 
 Repita o comando em `n1Backbone` e `n3Backbone`. Observe que cada roteador conhece somente os prefixos diretamente conectados a ele. Sem uma rota para `2001:db8:4::/64`, o `n2Backbone` não consegue encaminhar o tráfego do `n4HostA` ao `n5HostB`.
 
@@ -125,7 +125,7 @@ exit
 exit
 ```
 
-![Configuração OSPFv3 do n1Backbone](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/configuracao-ospfv3-r1.png)
+![Configuração OSPFv3 do n1Backbone](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/configuracao-ospfv3-r1.png)
 
 ### 3.2 Configuração do n2Backbone
 
@@ -144,7 +144,7 @@ exit
 exit
 ```
 
-![Configuração OSPFv3 do n2Backbone](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/configuracao-ospfv3-r2.png)
+![Configuração OSPFv3 do n2Backbone](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/configuracao-ospfv3-r2.png)
 
 ### 3.3 Configuração do n3Backbone
 
@@ -163,7 +163,7 @@ exit
 exit
 ```
 
-![Configuração OSPFv3 do n3Backbone](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/configuracao-ospfv3-r3.png)
+![Configuração OSPFv3 do n3Backbone](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/configuracao-ospfv3-r3.png)
 
 Os principais comandos utilizados têm as seguintes funções:
 
@@ -194,7 +194,7 @@ show ipv6 route
 exit
 ```
 
-![Estado do OSPFv3, vizinhos e rotas no n2Backbone](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/status-ospfv3-r2.png)
+![Estado do OSPFv3, vizinhos e rotas no n2Backbone](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/status-ospfv3-r2.png)
 
 Analise as informações apresentadas:
 
@@ -208,7 +208,7 @@ Em seguida, consulte a tabela de roteamento instalada no sistema operacional:
 ip -6 route show
 ```
 
-![Tabela de rotas IPv6 após a configuração do OSPFv3](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/rotas-ospfv3-r2.png)
+![Tabela de rotas IPv6 após a configuração do OSPFv3](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/rotas-ospfv3-r2.png)
 
 Repita os comandos em `n1Backbone` e `n3Backbone`. Os resultados devem ser semelhantes, com diferenças nos Router IDs, vizinhos, interfaces de saída e próximos saltos.
 
@@ -235,7 +235,7 @@ ping6 -c 4 2001:db8:4::20
 
 Agora o teste deve ser bem-sucedido, pois os roteadores conhecem os prefixos da topologia e conseguem encaminhar os pacotes até a rede de destino.
 
-![Teste de conectividade bem-sucedido entre n4HostA e n5HostB](https://raw.githubusercontent.com/hackinsdn/labs/refs/heads/main/lab-ospf-ipv6/images/ping-host-a-host-b-sucesso.png)
+![Teste de conectividade bem-sucedido entre n4HostA e n5HostB](https://raw.githubusercontent.com/italovalcy/hackinsdn-labs/refs/heads/main/lab-ospf-ipv6/images/ping-host-a-host-b-sucesso.png)
 
 Registre também o caminho utilizado:
 
